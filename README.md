@@ -20,13 +20,14 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
+* [X] Upon first loading, the app originally would immediately pull up the keyboard. I changed this to only pull up the keyboard only when the text field is clicked. 
+* [X] Originally, once the keyboard came up, it would never go back down. I changed this for the keyboard to go away when one clicks at any alternate point on the screen. 
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-! [Walkthrough](src1.gif)
+[Walkthrough](src1.gif)
 
 GIF created with [RecordIt](http://recordit.co/).
 
