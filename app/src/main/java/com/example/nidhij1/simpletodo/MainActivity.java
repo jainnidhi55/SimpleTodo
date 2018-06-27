@@ -1,9 +1,13 @@
 package com.example.nidhij1.simpletodo;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -44,11 +48,17 @@ public class MainActivity extends AppCompatActivity {
 
         //setup listener on creation
         setupListViewListener();
+
     }
 
     public void onAddItem(View v){
         //reference to EditText created with the layout
         EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
+
+        //keyboard goes away
+        InputMethodManager imm = (InputMethodManager) getSystemService(etNewItem.getContext().INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(etNewItem.getApplicationWindowToken(), 0);
+
         //grab EditText's content as a String
         String itemText = etNewItem.getText().toString();
         //add the item to the list via the adapter
@@ -70,10 +80,63 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("MainActivity", "Removed item " + position);
                 writeItems(); //writes
                 //return true to tell framework that the long click was consumed
+
                 return true;
             }
         });
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, final int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                //builder.setCancelable(true);
+                builder.setTitle("Enter new task name");
+                //builder.setMessage("Message");
+                View li = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialogue, null);
+                View dialogueView = (View) li.findViewById(R.id.dlg);
+                builder.setView(dialogueView);
+                final EditText dlgedit = (EditText) li.findViewById(R.id.editText);
+                builder.setPositiveButton("Confirm",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                /*items.remove(position);
+                                itemsAdapter.notifyDataSetChanged();
+                                String itemText = dlgedit.getText().toString();
+                                //add the item to the list via the adapter
+                                itemsAdapter.add(itemText);
+                                //clear the EditText by setting it to an empty String
+                                dlgedit.setText("");
+                                writeItems();*/
+
+                                //extra
+                                // extract updated item value from result extras
+
+                                String updatedItem = dlgedit.getText().toString();
+                                Log.d("todo", "PRINT" + updatedItem);
+                                // get the position of the item which was edited
+                                // update the model with the new item text at the edited position
+                                items.set(position, updatedItem);
+                                // notify the adapter the model changed
+                                itemsAdapter.notifyDataSetChanged();
+                                // Store the updated items back to disk
+                                writeItems();
+                                // notify the user the operation completed OK
+
+                            }
+                        });
+                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
     }
+
+
 
     //returns the file in which the data is stored
     private File getDataFile() {
