@@ -16,12 +16,13 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-* [ ] User can **tap a todo item in the list and bring up an edit screen for the todo item** and then have any changes to the text reflected in the todo list
+* [X] User can **tap a todo item in the list and bring up an edit screen for the todo item** and then have any changes to the text reflected in the todo list
 
 The following **additional** features are implemented:
 
 * [X] Upon first loading, the app originally would immediately pull up the keyboard. I changed this to only pull up the keyboard only when the text field is clicked. 
 * [X] Originally, once the keyboard came up, it would never go back down. I changed this for the keyboard to go away when one clicks at any alternate point on the screen. 
+* [X] I didn't use the slides for the optional feature, but rather created my own popup button, in which I inserted a completely external view. 
 
 ## Video Walkthrough
 
