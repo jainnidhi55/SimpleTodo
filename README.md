@@ -23,6 +23,7 @@ The following **additional** features are implemented:
 * [X] Upon first loading, the app originally would immediately pull up the keyboard. I changed this to only pull up the keyboard only when the text field is clicked. 
 * [X] Originally, once the keyboard came up, it would never go back down. I changed this for the keyboard to go away when one clicks at any alternate point on the screen. 
 * [X] I didn't use the slides for the optional feature, but rather created my own popup button, in which I inserted a completely external view. 
+* [X] I added a cancel button in the "edit" popup just in case the user accidentally clicked the edit button and didn't truly want to edit the task. 
 
 ## Video Walkthrough
 
